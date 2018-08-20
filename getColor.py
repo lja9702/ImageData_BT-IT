@@ -1,10 +1,18 @@
 import numpy as np
 import cv2
+from os import listdir
+from os.path import isfile, join
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
+#가져올 파일들이 있는 directory path
+path_dir = '/JinahsGit/ImageData_BT-IT/dataSets/Coat'
 
-image = cv2.imread("/home/lja97/28_35000.jpg")
+#path에 존재하는 파일 목록 가져오기
+file_list = [f for f in listdir(path_dir) if isfile(join(path_dir, f))]
+file_list = [x for x in file_list if x.find("jpg") != -1]
+
+image = cv2.imread(path_dir + "/12_245000.jpg")
 print(image.shape)
 
 # 채널을 BGR -> RGB로 변경
@@ -16,6 +24,7 @@ print(image.shape)
 k = 5 # KMeans clustering 실행
 clt = KMeans(n_clusters = k)
 clt.fit(image)
+
 class colorRGB_and_per_matching:
     def __Init__(self):
         self.RGBvalue = []
