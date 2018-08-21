@@ -5,11 +5,11 @@ import numpy as np
 import tensorflow as tf
 
 # 추론을 진행할 이미지 경로
-imagePath = '/home/lja97/testt.jpeg'
+imagePath = '/home/lja97/test.jpg'
 # 읽어들일 graph 파일 경로
-modelFullPath = '/tmp/output_graph.pb'
+modelFullPath = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_graph.pb'
 # 읽어들일 labels 파일 경로
-labelsFullPath = '/tmp/output_labels.txt'
+labelsFullPath = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_labels.txt'
 
 
 def create_graph():

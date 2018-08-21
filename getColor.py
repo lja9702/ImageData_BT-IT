@@ -61,6 +61,7 @@ sortingList = sorted(matchingList, key = lambda c: c.percent, reverse = True)
 #두번째로 높은 컬러 추출 (첫번쨰 컬러는 배경색이라고 가정)
 mostColor = sortingList[1]
 
+
 #def plot_colors(hist, centroids):
 #    bar = np.zeros((50, 300, 3), dtype="uint8")
 #    startX = 0
