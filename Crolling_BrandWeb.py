@@ -231,11 +231,12 @@ def get_ALAND(url, brand):
 #CLUB CAMBRIDGE
 #따로 폴더 만들기!
 #https://www.kolonmall.com/CLUB-CAMBRIDGE -> 데이터 개별저장
-get_Topten(url = "https://www.topten10.co.kr/main/main.asp", brand = "Topten")
-get_Mixxo(url = "http://mixxo.elandmall.com/main/initMain.action?chnl_no=GAW&chnl_dtl_no=1803401340&_emk_keyword=MIXXO&gclid=CjwKCAjw8O7bBRB0EiwAfbrTh68VSa9JCwk3GQWI-NjCHyojwrkavrow95BQjUkifKMPFftcWZCmzRoC59EQAvD_BwE&utm_referrer=http%3A%2F%2Fwww.elandmall.com%2Fgate%2Fgate.action%3Fchnl_no%3DGAW%26chnl_dtl_no%3D1803401340%26_emk_keyword%3DMIXXO%26gclid%3DCjwKCAjw8O7bBRB0EiwAfbrTh68VSa9JCwk3GQWI-NjCHyojwrkavrow95BQjUkifKMPFftcWZCmzRoC59EQAvD_BwE", brand = "Mixxo")
-get_PlasticIsland(url = "https://www.theamall.com", brand = "PlasticIsland")
-get_LuckyChouette(url = "https://www.kolonmall.com/LUCKYCHOUETTE", brand = "LuckyChouette")
-get_Tomboy(url = "http://fashion.sivillage.com/display/brandTOMBOYMain?temp=www.tomboy.co.kr", brand = "Tomboy")
-get_Spao(url = "http://spao.elandmall.com/main/initMain.action", brand = "Spao")
-get_8seconds(url = "http://www.ssfshop.com/8Seconds/main?dspCtgryNo=&brandShopNo=BDMA07A01&brndShopId=8SBSS&leftBrandNM=", brand = "8seconds")
-get_ALAND(url = "http://www.a-land.co.kr", brand = "ALAND")
+#get_Topten(url = "https://www.topten10.co.kr/main/main.asp", brand = "Topten")
+#get_Mixxo(url = "http://mixxo.elandmall.com/main/initMain.action?chnl_no=GAW&chnl_dtl_no=1803401340&_emk_keyword=MIXXO&gclid=CjwKCAjw8O7bBRB0EiwAfbrTh68VSa9JCwk3GQWI-NjCHyojwrkavrow95BQjUkifKMPFftcWZCmzRoC59EQAvD_BwE&utm_referrer=http%3A%2F%2Fwww.elandmall.com%2Fgate%2Fgate.action%3Fchnl_no%3DGAW%26chnl_dtl_no%3D1803401340%26_emk_keyword%3DMIXXO%26gclid%3DCjwKCAjw8O7bBRB0EiwAfbrTh68VSa9JCwk3GQWI-NjCHyojwrkavrow95BQjUkifKMPFftcWZCmzRoC59EQAvD_BwE", brand = "Mixxo")
+#get_PlasticIsland(url = "https://www.theamall.com", brand = "PlasticIsland")
+#get_LuckyChouette(url = "https://www.kolonmall.com/LUCKYCHOUETTE", brand = "LuckyChouette")
+#get_Tomboy(url = "http://fashion.sivillage.com/display/brandTOMBOYMain?temp=www.tomboy.co.kr", brand = "Tomboy")
+#get_Spao(url = "http://spao.elandmall.com/main/initMain.action", brand = "Spao")
+#get_8seconds(url = "http://www.ssfshop.com/8Seconds/main?dspCtgryNo=&brandShopNo=BDMA07A01&brndShopId=8SBSS&leftBrandNM=", brand = "8seconds")
+#get_ALAND(url = "http://www.a-land.co.kr", brand = "ALAND")
+
