@@ -2,10 +2,18 @@ from bs4 import BeautifulSoup
 import urllib.request
 import os
 from selenium import webdriver
-#base_url: 이미지를 따올 서버의 주소
-#url: 접속할 URL
+#PATH = 사진 저장 경로
+#CHROME_PATH = 크롬드라이브의 경로 (.exe)
 PATH = "/home/lja97/Crolling/"
+CHROME_PATH = '/home/lja97/다운로드/chromedriver'
 
+#크롬창을 따로 키지않아도 실행되게 해주는 코드
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+options.add_argument("disable-gpu")
+
+#폴더가 존재하지 않으면 자동으로 만들어주는 함수
 def check_dir_and_make(brand_name):
     dirname = PATH + brand_name
     if not os.path.isdir(dirname):
@@ -14,12 +22,12 @@ def check_dir_and_make(brand_name):
 
 def get_Topten(url, brand):
     count = 1   #웹사이트에 있는 이미지를 크롤링 한 순서번호로 파일 저장
-    driver = webdriver.Chrome('/home/lja97/다운로드/chromedriver')
-    driver.implicitly_wait(3)
-    driver.get(url)
-    html = driver.page_source
-    soup = BeautifulSoup(html)
+    driver = webdriver.Chrome(CHROME_PATH, chrome_options=options)  #창을 키지않아도 해당하는 주소를 가져옴
+    driver.get(url) #url을 가져온다
+    html = driver.page_source   #해당 페이지의 소스를 따온다
+    soup = BeautifulSoup(html) #방식은 html
     check_dir_and_make(brand)
+    driver.quit()
     for a_tag in soup.find_all('a'):
         if a_tag.has_attr('style') and "background-image" in a_tag['style']:
             st = a_tag['style']     #style속성을 받아오고
@@ -136,57 +144,72 @@ def get_Tomboy(url, brand):
 
 def get_Spao(url, brand):
     count = 1
-    html = urllib.request.urlopen(url)
-    source = html.read()
-    soup = BeautifulSoup(source, "html.parser")
+    driver = webdriver.Chrome(CHROME_PATH, chrome_options=options)
+    driver.get(url)
+    html = driver.page_source
+    soup = BeautifulSoup(html)
     check_dir_and_make(brand)
-    div = soup.find_all('div', {'class': 'bnr_sub'})
+    driver.quit()
+
+    div = soup.find_all('div', {'class': 'box_promotion_bnr '})
     for d_tag in div:
-        for img_tag in soup.find_all('img'):
-            st = img_tag['src']
-            if "http" in st:
-                img_url = st
-            else:
-                img_url = "http:" + st
-            print(img_url)
-            filepath, fileext = os.path.splitext(img_url)
-            if fileext == '.jpg' or fileext == '.jpeg':
-                img_name = str(count) + str(fileext)
-            urllib.request.urlretrieve(img_url, PATH + brand + "/" + img_name)
-            print("이미지 url: ", img_url)
-            print("이미지 명: ", img_name)
-            print("\n")
-            count += 1
+        for li_tag in soup.find_all('li'):
+            if li_tag.has_attr('style') and "background-image" in li_tag['style']:
+                st = li_tag['style']
+                start_idx = st.index("url(") + len("url(")  # url 뒤부터 인덱스 받아오기
+                end_idx = st.index(");")  # 괄호가 닫히기 전 인덱스 받기
+                if "http" in st:
+                    img_url = st[start_idx+1:end_idx-1]
+                else:
+                    img_url = "http:" + st[start_idx+1:end_idx-1]
+                print(img_url)
+                filepath, fileext = os.path.splitext(img_url)
+                if fileext == '.jpg' or fileext == '.jpeg':
+                    img_name = str(count) + str(fileext)
+                    urllib.request.urlretrieve(img_url, PATH + brand + "/" + img_name)
+                    print("이미지 url: ", img_url)
+                    print("이미지 명: ", img_name)
+                    print("\n")
+                    count += 1
 
 def get_8seconds(url, brand):
     count = 1
-    html = urllib.request.urlopen(url)
-    source = html.read()
-    soup = BeautifulSoup(source, "html.parser")
+    driver = webdriver.Chrome(CHROME_PATH, chrome_options=options)
+    driver.get(url)
+    html = driver.page_source
+    soup = BeautifulSoup(html)
     check_dir_and_make(brand)
-    div = soup.find_all('section', {'class': 'billboard'})
-    for d_tag in div:
+    driver.quit()
+
+    div = soup.find_all('div', {'class': 'lSSlideOuter '})
+    for d in div:
+        print("AA")
         for img_tag in soup.find_all('img'):
-            st = img_tag['src']
-            img_url = st
-            print(img_url)
-            filepath, fileext = os.path.splitext(img_url)
-            if fileext == '.jpg' or fileext == '.jpeg':
-                img_name = str(count) + str(fileext)
-                urllib.request.urlretrieve(img_url, PATH + brand + "/" + img_name)
-                print("이미지 url: ", img_url)
-                print("이미지 명: ", img_name)
-                print("\n")
-                count += 1
+            if img_tag.has_attr('src') and "http://" in img_tag['src']:
+                st = img_tag['src']
+                start_idx = st.index("http://") + len("http://")
+                end_idx = len(st)
+                img_url = "http://" + urllib.parse.quote(st[start_idx:end_idx])
+                print(img_url)
+                filepath, fileext = os.path.splitext(img_url)
+                if fileext == '.jpg' or fileext == '.jpeg':
+                    img_name = str(count) + str(fileext)
+                    urllib.request.urlretrieve(img_url, PATH + brand + "/" + img_name)
+                    print("이미지 url: ", img_url)
+                    print("이미지 명: ", img_name)
+                    print("\n")
+                    count += 1
 
 def get_ALAND(url, brand):
     count = 1
-    driver = webdriver.Chrome('/home/lja97/다운로드/chromedriver')
+    driver = webdriver.Chrome(CHROME_PATH, chrome_options=options)
     driver.implicitly_wait(3)
     driver.get(url)
     html = driver.page_source
     soup = BeautifulSoup(html)
     check_dir_and_make(brand)
+    driver.quit()
+
     div = soup.find_all('div', {'class':'wrap-index-mpromotion main-banner'})
     for img_tag in soup.find_all('img'):
         st = img_tag['src']
