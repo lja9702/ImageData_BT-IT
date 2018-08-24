@@ -5,14 +5,18 @@ from os.path import isfile, join
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
-#가져올 파일들이 있는 directory path
-path_dir = '/JinahsGit/ImageData_BT-IT/dataSets/Coat'
+import os
+import Get_and_Split_path
+
+#가져올 파일의 디렉토리와 파일 명 풀네임 받기
+dir_path = Get_and_Split_path.dir_path
+file_path = Get_and_Split_path.FILE_PATH
 
 #path에 존재하는 파일 목록 가져오기
-file_list = [f for f in listdir(path_dir) if isfile(join(path_dir, f))]
+file_list = [f for f in listdir(dir_path) if isfile(join(dir_path, f))]
 file_list = [x for x in file_list if x.find("jpg") != -1]
 
-image = cv2.imread(path_dir + "/12_245000.jpg")
+image = cv2.imread(file_path)
 print(image.shape)
 
 # 채널을 BGR -> RGB로 변경
@@ -60,8 +64,9 @@ sortingList = sorted(matchingList, key = lambda c: c.percent, reverse = True)
 
 #두번째로 높은 컬러 추출 (첫번쨰 컬러는 배경색이라고 가정)
 mostColor = sortingList[1]
+mostColor.RGBvalue = [int (i) for i in mostColor.RGBvalue]
 
-
+print(mostColor.RGBvalue)
 #def plot_colors(hist, centroids):
 #    bar = np.zeros((50, 300, 3), dtype="uint8")
 #    startX = 0
