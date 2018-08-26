@@ -80,6 +80,9 @@ from tensorflow.python.framework import graph_util
 from tensorflow.python.framework import tensor_shape
 from tensorflow.python.platform import gfile
 from tensorflow.python.util import compat
+import Get_and_Split_path
+
+PATH = Get_and_Split_path.RETRAIN_PATH
 
 FLAGS = None
 
@@ -96,7 +99,6 @@ MODEL_INPUT_DEPTH = 3
 JPEG_DATA_TENSOR_NAME = 'DecodeJpeg/contents:0'
 RESIZED_INPUT_TENSOR_NAME = 'ResizeBilinear:0'
 MAX_NUM_IMAGES_PER_CLASS = 2 ** 27 - 1  # ~134M
-
 
 def create_image_lists(image_dir, testing_percentage, validation_percentage):
   """file system으로부터 training 이미지들의 list를 만든다.
@@ -934,19 +936,19 @@ if __name__ == '__main__':
   parser.add_argument(
       '--output_graph',
       type=str,
-      default='/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_graph.pb',
+      default= PATH + '/output_graph.pb',
       help='Where to save the trained graph.'
   )
   parser.add_argument(
       '--output_labels',
       type=str,
-      default='/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_labels.txt',
+      default= PATH + '/output_labels.txt',
       help='Where to save the trained graph\'s labels.'
   )
   parser.add_argument(
       '--summaries_dir',
       type=str,
-      default='/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/retrain_logs',
+      default= PATH + '/retrain_logs',
       help='Where to save summary logs for TensorBoard.'
   )
   parser.add_argument(
@@ -1020,7 +1022,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--model_dir',
       type=str,
-      default='/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/imagenet',
+      default= PATH + '/imagenet',
       help="""\
       Path to classify_image_graph_def.pb,
       imagenet_synset_to_human_label_map.txt, and
@@ -1030,7 +1032,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--bottleneck_dir',
       type=str,
-      default='/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/bottleneck',
+      default= PATH + '/bottleneck',
       help='Path to cache bottleneck layer values as files.'
   )
   parser.add_argument(

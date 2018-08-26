@@ -1,7 +1,11 @@
 import os
 
-FILE_PATH = '/JinahsGit/ImageData_BT-IT/dataSets/Coat/12_245000.jpg'   ###경로 수정하기
+FILE_PATH = '/home/lja97/MyCloset/3.jpg'   ##옷 자체의 경로
 
+##retrain_run_inference.py 실행시킬 때의 graph와 label의 위치 경로
+RETRAIN_PATH = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion'
+
+CLOSET_PATH = '/home/lja97/MyCloset'
 #======================================================================================================
 #가져온 path에서 디렉토리와 파일명 분리 추출
 

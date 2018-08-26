@@ -3,13 +3,17 @@
 
 import numpy as np
 import tensorflow as tf
+import Get_and_Split_path
+
+PATH = Get_and_Split_path.RETRAIN_PATH
+
 
 # 추론을 진행할 이미지 경로
-imagePath = '/home/lja97/test.jpg'
+imagePath = Get_and_Split_path.FILE_PATH         ###########옷을 업로드 할때 그 해당 링크
 # 읽어들일 graph 파일 경로
-modelFullPath = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_graph.pb'
+modelFullPath = PATH + '/output_graph.pb'
 # 읽어들일 labels 파일 경로
-labelsFullPath = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion/output_labels.txt'
+labelsFullPath = PATH + '/output_labels.txt'
 
 
 def create_graph():
@@ -50,6 +54,7 @@ def run_inference_on_image():
             print('%s (score = %.5f)' % (human_string, score))
 
         answer = labels[top_k[0]]
+
         return answer
 
 
