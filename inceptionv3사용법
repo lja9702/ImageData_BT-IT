@@ -1,0 +1,5 @@
+python inceptionv3_retrain.py --image_dir ~/cat_photos 
+
+윈도우에서는  python inceptionv3_retrain.py --image_dir C:\\cat_photos 
+
+학습추론시  python retrain_run_inference.py 
