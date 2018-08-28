@@ -17,22 +17,30 @@ from PyQt5.QtWidgets import QApplication, QFileSystemModel, QTreeView, QWidget, 
 from PyQt5.QtGui import QIcon
 from colormap import rgb2hex
 import os
+import shutil
 from bs4 import BeautifulSoup
 import urllib.request
 import os
 import random
-
+import csv
 import threading
 from selenium import webdriver
 
 
 import Crolling_BrandWeb
+import Get_and_Split_path
+import Make_dressInfoFile
+import rgb2colorname
+import retrain_run_inference
 
-PATH = "C:\\Users/jykatharGram/Desktop/contest2/Brand_img/"
+
+#################################################################################################
+get_all_path = Get_and_Split_path.GetAllPath()
+CROLLING_PATH = get_all_path.CROLLING_PATH
+CLOSET_PATH = get_all_path.CLOSET_PATH
+#################################################################################################
 global new
 new = ""
-
-
 
 #Crolling_BrandWeb.get_Topten(url="https://www.topten10.co.kr/main/main.asp", brand="Topten")
 #Crolling_BrandWeb.get_Mixxo(
@@ -57,16 +65,16 @@ class Banner(QWidget):
         self.Banner_name = QLabel("Banner_name")
 
         #path_dir = "C:\\Users/jykatharGram/Desktop/contest2/Brand_img"
-        dir_list = os.listdir(PATH)
+        dir_list = os.listdir(CROLLING_PATH)
         #print(dir_list)
         random_brand = random.choice(dir_list)
 
-        brand_file_list = os.listdir(PATH + random_brand)
+        brand_file_list = os.listdir(CROLLING_PATH + random_brand)
         #print(brand_file_list)
         random_img_in_brand = random.choice(brand_file_list)
         print(random_img_in_brand)
 
-        bannerPixelMap = QPixmap(PATH + random_brand + '/' + random_img_in_brand)
+        bannerPixelMap = QPixmap(CROLLING_PATH + random_brand + '/' + random_img_in_brand)
         smallerBannerPixmap = bannerPixelMap.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
         self.Banner_img.setPixmap(smallerBannerPixmap)
         self.Banner_name.setText(random_brand)
@@ -138,8 +146,8 @@ class myCloset(QWidget):
         self.treeview.setModel(self.dirModel)
         self.listview.setModel(self.fileModel)
 
-        self.treeview.setRootIndex(self.dirModel.index("C:\\Users/jykatharGram/Documents/GitHub/ImageData_BT-IT/dataSets"))
-        self.listview.setRootIndex(self.fileModel.index("C:\\Users/jykatharGram/Documents/GitHub/ImageData_BT-IT/dataSets"))
+        self.treeview.setRootIndex(self.dirModel.index(get_all_path.ROOT_PATH))
+        self.listview.setRootIndex(self.fileModel.index(get_all_path.ROOT_PATH))
 
         self.listview.setViewMode(QListView.IconMode)
         self.listview.setDragEnabled(True)
@@ -150,7 +158,6 @@ class myCloset(QWidget):
         self.listview.setRootIndex(self.fileModel.setRootPath(path))
 
 class Ui_MainWindow(object):
-
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("옷장 관리")
@@ -265,17 +272,29 @@ class Ui_MainWindow(object):
             self.label2 = QLabel("Cost: ")
             self.label3 = QLabel("Brand: ")
             self.label4 = QLabel("Color: ")
-            fn = os.path.split(self.new_cloth_name)
-            self.label5 = QLabel(fn[1])
+            self.fn = os.path.split(self.new_cloth_name) #파일 경로
+
+            get_all_path.set_Filepath(self.new_cloth_name)  #파일 경로 저장
+            # TODO:러닝된 옷의 가장 높은 확률 가져오기
+            retrain = retrain_run_inference.retrain_run_inference(get_all_path) #옷의 타입 판단
+            temp_type = retrain.run_inference_on_image()
+            self.type = temp_type[2:-3]
+
+            self.label5 = QLabel(self.type)
 
             self.lineEdit1 = QLineEdit()
             self.lineEdit2 = QLineEdit()
             self.styleChoice = QtWidgets.QLabel()
-            self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % (rgb2hex(0, 128, 64)))
-            self.fontColor = QtWidgets.QPushButton('Changing Color')
-            self.fontColor.clicked.connect(self.color_picker)
+
+            # TODO:새로운 옷의 컬러 추출
+            self.color, self.nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
+            self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % (rgb2hex(self.color[0], self.color[1], self.color[2])))
+            #self.fontColor = QtWidgets.QPushButton('Changing Color')
+            #self.fontColor.clicked.connect(self.color_picker)
+
             self.pushButton1 = QPushButton("내 옷장에 추가하기")
             self.pushButton1.clicked.connect(self.OKButtonClicked)
+
             self.pushButton2 = QPushButton("뒤로가기")
             self.pushButton2.clicked.connect(self.backButtonClicked)
 
@@ -287,7 +306,7 @@ class Ui_MainWindow(object):
             self.info_layout.addWidget(self.lineEdit1, 1, 1)
             self.info_layout.addWidget(self.lineEdit2, 2, 1)
             self.info_layout.addWidget(self.styleChoice, 3, 1)
-            self.info_layout.addWidget(self.fontColor, 3, 2)
+            #self.info_layout.addWidget(self.fontColor, 3, 2)
             self.info_layout.addWidget(self.pushButton1, 4, 1)
             self.info_layout.addWidget(self.pushButton2, 4, 2)
         else:
@@ -298,13 +317,24 @@ class Ui_MainWindow(object):
             self.label3 = QLabel("Brand: ")
             self.label4 = QLabel("Color: ")
             fn = os.path.split(self.cl.path)
+
+            get_all_path.set_Filepath(self.cl.path)  #옷의 파일 경로 받기
+
+            ################################# TODO: 옷정보 CSV파일에서 읽기
+
             self.label5 = QLabel(fn[1])
             self.label6 = QLabel("내 옷 가격")
             self.label7 = QLabel("내 옷 브랜드")
             self.styleChoice = QtWidgets.QLabel()
-            self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % (rgb2hex(0, 128, 64)))
-            self.fontColor = QtWidgets.QPushButton('Changing Color')
-            self.fontColor.clicked.connect(self.color_picker)
+
+
+            get_all_path.set_Filepath(self.new_cloth_name)
+            self.color, self.nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
+            self.styleChoice.setStyleSheet(
+                "QWidget { background-color: %s}" % (rgb2hex(self.color[0], self.color[1], self.color[2])))
+
+            #self.fontColor = QtWidgets.QPushButton('Changing Color')
+            #self.fontColor.clicked.connect(self.color_picker)
             self.pushButton2 = QPushButton("뒤로가기")
             self.pushButton2.clicked.connect(self.backButtonClicked)
 
@@ -315,7 +345,7 @@ class Ui_MainWindow(object):
             self.info_layout.addWidget(self.label5, 0, 1)
             self.info_layout.addWidget(self.label6, 1, 1)
             self.info_layout.addWidget(self.label7, 2, 1)
-            self.info_layout.addWidget(self.styleChoice, 3, 1)
+            #self.info_layout.addWidget(self.styleChoice, 3, 1)
             self.info_layout.addWidget(self.fontColor, 3, 2)
             self.info_layout.addWidget(self.pushButton2, 4, 2)
             self.cl.check = 0
@@ -352,7 +382,11 @@ class Ui_MainWindow(object):
     def OKButtonClicked(self):
         self.cost = self.lineEdit1.text()
         self.brand = self.lineEdit2.text()
-        self.close()
+
+        #TODO: 새로운 옷 MyCloset에 저장
+        shutil.copy2(self.new_cloth_name, CLOSET_PATH + self.fn[1])
+        Make_dressInfoFile.make_DressInfoFile(file_path = self.new_cloth_name, type = self.type, brand = self.brand, price = self.cost, color = self.color,
+                                              nearestcolor = self.nearestcolor)
 
     def backButtonClicked(self):
         for i in reversed(range(self.info_layout.count())):
@@ -366,9 +400,9 @@ class Ui_MainWindow(object):
         print(color.name())
         self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % color.name())
 
-    def style_choice(self, text):
-        self.styleChoice.setText(text)
-        QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create(text))
+    #def style_choice(self, text):
+     #   self.styleChoice.setText(text)
+     #   QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create(text))
 
 
 

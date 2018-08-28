@@ -7,7 +7,7 @@ import os
 import retrain_run_inference
 
 
-def make_DressInfoFile(file_path, brand, price):
+def make_DressInfoFile(file_path, type, brand, price, color, nearestcolor):
     get_all_path = Get_and_Split_path.GetAllPath()
     #파일 경로 넘겨주기
     get_all_path.set_Filepath(file_path)
@@ -28,15 +28,15 @@ def make_DressInfoFile(file_path, brand, price):
     #files = [x for x in files if x.find(".csv") == -1]
 
     #TODO:러닝된 옷의 가장 높은 확률 가져오기
-    retrain = retrain_run_inference.retrain_run_inference(get_all_path)
-    temp = retrain.run_inference_on_image()
-    type = temp[2:-3]
+    #retrain = retrain_run_inference.retrain_run_inference(get_all_path)
+    #temp = retrain.run_inference_on_image()
+    #type = temp[2:-3]
     print("type:", type)
 
     #TODO:옷의 가격, 브랜드 입력한 값 가져오기
 
     #옷의 색깔 (hex), (nearest_color)
-    color, nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
+    #color, nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
     #color = rgb2colorname.rgb2colorname(get_all_path).color
     print("color:", color)
     print("hexcolor:", rgb2hex(color[0], color[1], color[2]))
@@ -47,7 +47,6 @@ def make_DressInfoFile(file_path, brand, price):
     #simplecolor = items.group(1)
     print("simplecolor:" + nearestcolor)
 
-
     file = open(closet_path + "/closetInfo.csv", 'a', encoding='utf-8', newline='')
     wr = csv.writer(file)
 
@@ -55,4 +54,4 @@ def make_DressInfoFile(file_path, brand, price):
 
     file.close()
 
-make_DressInfoFile(file_path = '/home/lja97/MyCloset/383.jpg', brand = "Topten", price = 13400)
+#make_DressInfoFile(file_path = '/home/lja97/MyCloset/383.jpg', brand = "Topten", price = 13400)
