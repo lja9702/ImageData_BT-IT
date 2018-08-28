@@ -1169,45 +1169,46 @@ HexNameDict = { \
 ,"#FFFFFF":"gray" \
 }
 
-# TODO: Test calls using variety of RGB input values
-# TODO: Change to call argument with the point to find
-# pt = [221,183,134] # approximate to
-#pt = [0,0,0] # example needing zerofill
-#============================================================================================
-color = getColor.mostColor.RGBvalue
-pt = [color[0],color[1],color[2]]
-#============================================================================================
-# pt = [222,184,135] # = "burlywood","#DEB887"]
-# pt = [154,205,50] # = OliveDrab
+def rgb2colorname(get_all_path):
+ # TODO: Test calls using variety of RGB input values
+ # TODO: Change to call argument with the point to find
+ # pt = [221,183,134] # approximate to
+ #pt = [0,0,0] # example needing zerofill
+ #============================================================================================
+ color = getColor.get_Color(get_all_path).RGBvalue
+ pt = [color[0],color[1],color[2]]
+ #============================================================================================
+ # pt = [222,184,135] # = "burlywood","#DEB887"]
+ # pt = [154,205,50] # = OliveDrab
 
-# Lookup color name using Hex:ColorName dictionary:
-NearestRGB = (RGB[spatial.KDTree(RGB).query(pt)[1]])
+ # Lookup color name using Hex:ColorName dictionary:
+ NearestRGB = (RGB[spatial.KDTree(RGB).query(pt)[1]])
 
-# TODO: Calculate Hex from pt. (upper case letters)
-# Instead of str(hex(pt[0])[2:]) in Python2, this is Python3 compatible:
-s = '#' \
-    + format(NearestRGB[0],'x').zfill(2) \
-    + format(NearestRGB[1],'x').zfill(2) \
-    + format(NearestRGB[2],'x').zfill(2)
-ColorHex = s.upper() # "#8B7355"  # "#8B7355"
-ColorDiff = \
-     '('+'{0:+d}'.format(NearestRGB[0]-pt[0]) \
-    +','+'{0:+d}'.format(NearestRGB[1]-pt[1]) \
-    +','+'{0:+d}'.format(NearestRGB[2]-pt[2]) \
-    +')'
-try: ## TODO: try catch block per https://wiki.python.org/moin/HandlingExceptions
-    ColorName=HexNameDict[ColorHex]
-except:
-	ColorName="not found"
-print(('Nearest color name to input RGB ') \
-    + str(pt) \
-    + ' is "'+ ColorName +'"' \
-    +' '+ ColorHex  \
-    +' '+ str(NearestRGB) \
-    +', '+ ColorDiff \
-    +'.')
-
-#ColorName: 가장 근접한 색상 이름
-#ColorHex: 가장 근접한 색상의 16진수
-#NearestRGB: 가장 근접한 색상의 rgb값
-#ColorDiff: 두색의 오차
+ # TODO: Calculate Hex from pt. (upper case letters)
+ # Instead of str(hex(pt[0])[2:]) in Python2, this is Python3 compatible:
+ s = '#' \
+     + format(NearestRGB[0],'x').zfill(2) \
+     + format(NearestRGB[1],'x').zfill(2) \
+     + format(NearestRGB[2],'x').zfill(2)
+ ColorHex = s.upper() # "#8B7355"  # "#8B7355"
+ ColorDiff = \
+      '('+'{0:+d}'.format(NearestRGB[0]-pt[0]) \
+     +','+'{0:+d}'.format(NearestRGB[1]-pt[1]) \
+     +','+'{0:+d}'.format(NearestRGB[2]-pt[2]) \
+     +')'
+ try: ## TODO: try catch block per https://wiki.python.org/moin/HandlingExceptions
+     ColorName=HexNameDict[ColorHex]
+ except:
+     ColorName="not found"
+ print(('Nearest color name to input RGB ') \
+     + str(pt) \
+     + ' is "'+ ColorName +'"' \
+     +' '+ ColorHex  \
+     +' '+ str(NearestRGB) \
+     +', '+ ColorDiff \
+     +'.')
+ return [color, ColorName]
+ #ColorName: 가장 근접한 색상 이름
+ #ColorHex: 가장 근접한 색상의 16진수
+ #NearestRGB: 가장 근접한 색상의 rgb값
+ #ColorDiff: 두색의 오차

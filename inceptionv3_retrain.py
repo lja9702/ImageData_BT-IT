@@ -80,9 +80,8 @@ from tensorflow.python.framework import graph_util
 from tensorflow.python.framework import tensor_shape
 from tensorflow.python.platform import gfile
 from tensorflow.python.util import compat
-import Get_and_Split_path
 
-PATH = Get_and_Split_path.RETRAIN_PATH
+PATH = '/home/lja97/PycharmProjects/IT_BTProject_aboutFasion'
 
 FLAGS = None
 
