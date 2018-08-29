@@ -416,7 +416,6 @@ class Ui_MainWindow(object):
                 matchingList.append(CLOSET_PATH + row['name'])
                 cnt += 1
 
-
         ########TODO: 재영오빠한테 질문 if문 작성
         ########TODO: 두번째 질문 옷 불러오기 누른 여부 확인 리스너가 무엇?
 
@@ -425,22 +424,22 @@ class Ui_MainWindow(object):
             self.setText("<어울리는 옷이 없습니다.>")
         #옷장속의 매칭된 옷의 개수에 따라 출력 결과 달라짐
         else:
-            if (len(matchingList) >= 0):
+            if len(matchingList) >= 1:
                 bannerPixelMap_1 = QPixmap(matchingList[0])
                 smallerBannerPixmap_1 = bannerPixelMap_1.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
                 self.matching_img_1.setPixmap(smallerBannerPixmap_1)
 
-            if (len(matchingList) >= 1):
+            if len(matchingList) >= 2:
                 bannerPixelMap_2 = QPixmap(matchingList[1])
                 smallerBannerPixmap_2 = bannerPixelMap_2.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
                 self.matching_img_2.setPixmap(smallerBannerPixmap_2)
 
-            if (len(matchingList) >= 2):
+            if len(matchingList) >= 3:
                 bannerPixelMap_3 = QPixmap(matchingList[2])
                 smallerBannerPixmap_3 = bannerPixelMap_3.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
                 self.matching_img_3.setPixmap(smallerBannerPixmap_3)
 
-            if (len(matchingList) >= 3):
+            if len(matchingList) >= 4:
                 bannerPixelMap_4 = QPixmap(matchingList[3])
                 smallerBannerPixmap_4 = bannerPixelMap_4.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
                 self.matching_img_4.setPixmap(smallerBannerPixmap_4)
