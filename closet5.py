@@ -321,17 +321,16 @@ class Ui_MainWindow(object):
             get_all_path.set_Filepath(self.cl.path)  #옷의 파일 경로 받기
 
             ################################# TODO: 옷정보 CSV파일에서 읽기
-
-            self.label5 = QLabel(fn[1])
-            self.label6 = QLabel("내 옷 가격")
-            self.label7 = QLabel("내 옷 브랜드")
+            #csv파일 읽기
+            read_csv = Get_and_Split_path.read_csvFile(FILE_NAME = fn[1], CLOSET_PATH= CLOSET_PATH)
+            read_csv.get_specificRow_useFilePath()
+            self.label5 = QLabel(str(read_csv.type))
+            self.label6 = QLabel(str(read_csv.price))
+            self.label7 = QLabel(str(read_csv.brand))
             self.styleChoice = QtWidgets.QLabel()
 
-
-            get_all_path.set_Filepath(self.new_cloth_name)
-            self.color, self.nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
             self.styleChoice.setStyleSheet(
-                "QWidget { background-color: %s}" % (rgb2hex(self.color[0], self.color[1], self.color[2])))
+                "QWidget { background-color: %s}" % (read_csv.hexcolor))
 
             #self.fontColor = QtWidgets.QPushButton('Changing Color')
             #self.fontColor.clicked.connect(self.color_picker)
@@ -345,8 +344,8 @@ class Ui_MainWindow(object):
             self.info_layout.addWidget(self.label5, 0, 1)
             self.info_layout.addWidget(self.label6, 1, 1)
             self.info_layout.addWidget(self.label7, 2, 1)
-            #self.info_layout.addWidget(self.styleChoice, 3, 1)
-            self.info_layout.addWidget(self.fontColor, 3, 2)
+            self.info_layout.addWidget(self.styleChoice, 3, 1)
+            #self.info_layout.addWidget(self.fontColor, 3, 2)
             self.info_layout.addWidget(self.pushButton2, 4, 2)
             self.cl.check = 0
 
