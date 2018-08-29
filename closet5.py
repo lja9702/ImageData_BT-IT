@@ -25,8 +25,9 @@ import random
 import csv
 import threading
 from selenium import webdriver
+import pandas as pd
 
-
+import dressMatching
 import Crolling_BrandWeb
 import Get_and_Split_path
 import Make_dressInfoFile
@@ -182,9 +183,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout_2.addWidget(self.pushButton_2)
+        #self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
+        #self.pushButton_2.setObjectName("pushButton_2")
+        #self.verticalLayout_2.addWidget(self.pushButton_2)
 
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(860, 0, 431, 431))
@@ -263,7 +264,13 @@ class Ui_MainWindow(object):
         self.info_layout.addWidget(self.info_button)
         self.verticalLayout_5.addLayout(self.info_layout)
 
+        self.matchingLayout = QGridLayout()
+        self.matching_button = QPushButton("매칭")
+        self.matching_button.clicked.connect(self.matchingButtonClicked)
+        self.matchingLayout.addWidget(self.matching_button)
+        self.verticalLayout_2.addLayout(self.matchingLayout)
 
+    # 영역3의 '옷 정보보기' 버튼에 대한 이벤트 리스너
     def infoButtonClicked(self):
         if self.cl.check == 0:
             for i in reversed(range(self.info_layout.count())):
@@ -278,17 +285,17 @@ class Ui_MainWindow(object):
             # TODO:러닝된 옷의 가장 높은 확률 가져오기
             retrain = retrain_run_inference.retrain_run_inference(get_all_path) #옷의 타입 판단
             temp_type = retrain.run_inference_on_image()
-            self.type = temp_type[2:-3]
+            self.newCloth_type = temp_type[2:-3]         #옷의 타입
 
-            self.label5 = QLabel(self.type)
+            self.label5 = QLabel(self.newCloth_type)
 
             self.lineEdit1 = QLineEdit()
             self.lineEdit2 = QLineEdit()
             self.styleChoice = QtWidgets.QLabel()
 
             # TODO:새로운 옷의 컬러 추출
-            self.color, self.nearestcolor = rgb2colorname.rgb2colorname(get_all_path)
-            self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % (rgb2hex(self.color[0], self.color[1], self.color[2])))
+            self.newCloth_color, self.newCloth_nearestcolor = rgb2colorname.rgb2colorname(get_all_path)   #옷의 rgb값, 가까운 영문 색
+            self.styleChoice.setStyleSheet("QWidget { background-color: %s}" % (rgb2hex(self.newCloth_color[0], self.newCloth_color[1], self.newCloth_color[2])))
             #self.fontColor = QtWidgets.QPushButton('Changing Color')
             #self.fontColor.clicked.connect(self.color_picker)
 
@@ -324,6 +331,7 @@ class Ui_MainWindow(object):
             #csv파일 읽기
             read_csv = Get_and_Split_path.read_csvFile(FILE_NAME = fn[1], CLOSET_PATH= CLOSET_PATH)
             read_csv.get_specificRow_useFilePath()
+
             self.label5 = QLabel(str(read_csv.type))
             self.label6 = QLabel(str(read_csv.price))
             self.label7 = QLabel(str(read_csv.brand))
@@ -354,12 +362,12 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "옷장 관리"))
         self.pushButton.setText(_translate("MainWindow", "PushButton"))
         self.label.setText(_translate("MainWindow", "<옷 추천>"))
-        self.pushButton_2.setText(_translate("MainWindow", "매칭"))
+        # self.pushButton_2.setText(_translate("MainWindow", "매칭"))
         self.pushButton_3.setText(_translate("MainWindow", "옷 불러오기"))
         self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
-        #self.pushButton_6.setText(_translate("MainWindow", "PushButton"))
-        #self.pushButton_7.setText(_translate("MainWindow", "PushButton"))
+        # self.pushButton_6.setText(_translate("MainWindow", "PushButton"))
+        # self.pushButton_7.setText(_translate("MainWindow", "PushButton"))
 
     def openFile(self):
 
@@ -376,8 +384,78 @@ class Ui_MainWindow(object):
         self.info_button.clicked.connect(self.infoButtonClicked)
         self.info_layout.addWidget(self.info_button)
 
+    # 영역2의 '매칭' 버튼에 대한 이벤트 리스너
+    def matchingButtonClicked(self):
+
+        for i in reversed(range(self.matchingLayout.count())):
+            self.matchingLayout.itemAt(i).widget().deleteLater()
+
+        self.matching_img_1 = QLabel()
+        self.matching_img_2 = QLabel()
+        self.matching_img_3 = QLabel()
+        self.matching_img_4 = QLabel()
+
+        # 옷장 경로
+        dir_list = os.listdir(CLOSET_PATH)
+
+        #TODO: 색상과 옷의 타입 고려해서 옷장 속의 옷 추천하기
+
+        matching = dressMatching.matching_area2(dress_path = self.new_cloth_name, closet_path = CLOSET_PATH,
+                                                type = self.newCloth_type, simplecolor = self.newCloth_nearestcolor)
+
+        #옷장 리스트 받아오기
+        info = pd.read_csv(CLOSET_PATH + 'closetInfo.csv',
+                               names=["name", "type", "brand", "price", "hexcolor", "simplecolor"])
+
+        #옷장 리스트 한줄씩 검색하면서 보여줄 옷 뽑기
+        matchingList = []   #매칭된 옷들의 경로
+        cnt = 0     #최대 4개의 옷만 추출
+        for index, row in info.iterrows():
+            if cnt == 4:    break
+            if(matching.matching_cloth(rowtype = row['type'], rowcolor = row['simplecolor'])): #만약 어울리는 옷이 있으면 True반환
+                matchingList.append(CLOSET_PATH + row['name'])
+                cnt += 1
 
 
+        ########TODO: 재영오빠한테 질문 if문 작성
+        ########TODO: 두번째 질문 옷 불러오기 누른 여부 확인 리스너가 무엇?
+
+        #만약 옷장속의 매칭된 옷이 없다면 어울리는 옷이 없다고 출력
+        if len(matchingList) == 0 :
+            self.setText("<어울리는 옷이 없습니다.>")
+        #옷장속의 매칭된 옷의 개수에 따라 출력 결과 달라짐
+        else:
+            if (len(matchingList) >= 0):
+                bannerPixelMap_1 = QPixmap(matchingList[0])
+                smallerBannerPixmap_1 = bannerPixelMap_1.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+                self.matching_img_1.setPixmap(smallerBannerPixmap_1)
+
+            if (len(matchingList) >= 1):
+                bannerPixelMap_2 = QPixmap(matchingList[1])
+                smallerBannerPixmap_2 = bannerPixelMap_2.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+                self.matching_img_2.setPixmap(smallerBannerPixmap_2)
+
+            if (len(matchingList) >= 2):
+                bannerPixelMap_3 = QPixmap(matchingList[2])
+                smallerBannerPixmap_3 = bannerPixelMap_3.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+                self.matching_img_3.setPixmap(smallerBannerPixmap_3)
+
+            if (len(matchingList) >= 3):
+                bannerPixelMap_4 = QPixmap(matchingList[3])
+                smallerBannerPixmap_4 = bannerPixelMap_4.scaled(300, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+                self.matching_img_4.setPixmap(smallerBannerPixmap_4)
+
+        self.back_button_2 = QPushButton("뒤로 가기")
+        self.back_button_2.clicked.connect(self.backButtonClicked_2)
+
+        self.matchingLayout.addWidget(self.matching_img_1, 0, 0)
+        self.matchingLayout.addWidget(self.matching_img_2, 0, 1)
+        self.matchingLayout.addWidget(self.matching_img_3, 1, 0)
+        self.matchingLayout.addWidget(self.matching_img_4, 1, 1)
+        self.matchingLayout.addWidget(self.back_button_2, 5, 1)
+
+
+    # 영역3의 '내 옷장에 추가하기' 버튼에 대한 이벤트 리스너
     def OKButtonClicked(self):
         self.cost = self.lineEdit1.text()
         self.brand = self.lineEdit2.text()
@@ -387,12 +465,22 @@ class Ui_MainWindow(object):
         Make_dressInfoFile.make_DressInfoFile(file_path = self.new_cloth_name, type = self.type, brand = self.brand, price = self.cost, color = self.color,
                                               nearestcolor = self.nearestcolor)
 
+    # 영역3의 '뒤로가기' 버튼에 대한 이벤트 리스너
     def backButtonClicked(self):
         for i in reversed(range(self.info_layout.count())):
             self.info_layout.itemAt(i).widget().deleteLater()
         self.info_button = QPushButton("옷 정보보기")
         self.info_button.clicked.connect(self.infoButtonClicked)
         self.info_layout.addWidget(self.info_button)
+
+    # 영역2의 '뒤로가기' 버튼에 대한 이벤트 리스너
+    def backButtonClicked_2(self):
+        for i in reversed(range(self.matchingLayout.count())):
+            self.matchingLayout.itemAt(i).widget().deleteLater()
+        self.matching_button = QPushButton("매칭")
+        self.matching_button.clicked.connect(self.matchingButtonClicked)
+        self.matchingLayout.addWidget(self.matching_button)
+
 
     def color_picker(self):
         color = QtWidgets.QColorDialog.getColor()
