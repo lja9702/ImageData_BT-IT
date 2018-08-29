@@ -15,17 +15,17 @@ color_matching = {'red' : ['red', 'orange', 'gray', 'black', 'white'],
                   'brown' : ['orange', 'yellow', 'blue', 'gray', 'black', 'white', 'green']
                   }
 
-type_matching = {'jacket' : ['dress', 'pants long', 't shirt long', 'skirt', 'headwear', 't shirt short', 'shirt'],
+type_matching = {'jacket' : ['dress', 'pants long ', 't shirt long ', 'skirt', 'headwear', 't shirt short ', 'shirt'],
                  'dress' : ['jacket', 'coat', 'padded'],
-                 'pants long' : ['jacket', 't shirt long', 'headwear', 'coat', 't shirt short', 'shirt', 'padded'],
-                 't shirt long' : ['jacket', 'pants long', 'skirt', 'headwear', 'coat', 'pants shorts', 'padded'],
-                 'skirt' : ['jacket', 't shirt long', 'coat', 't shirt short', 'shirt', 'padded'],
-                 'headwear' : ['jacket', 'pants long', 't shirt long', 'pants shorts', 't shirt short', 'padded'],
-                 'coat' : ['dress', 'pants long', 'skirt', 't shirt long', 'shirt'],
-                 'pants shorts' : ['jacket', 't shirt long', 'headwear', 't shirt short'],
-                 't shirt short' : ['jacket', 'pants long', 'skirt', 'headwear', 'pants shorts'],
-                 'shirt' : ['jacket', 'pants long', 'skirt', 'coat', 'padded'],
-                 'padded' : ['dress', 'pants long', 't shirt long', 'skirt', 'headwear', 'shirt']
+                 'pants long ' : ['jacket', 't shirt long ', 'headwear', 'coat', 't shirt short ', 'shirt', 'padded'],
+                 't shirt long ' : ['jacket', 'pants long ', 'skirt', 'headwear', 'coat', 'pants shorts ', 'padded'],
+                 'skirt' : ['jacket', 't shirt long ', 'coat', 't shirt short ', 'shirt', 'padded'],
+                 'headwear' : ['jacket', 'pants long ', 't shirt long ', 'pants shorts ', 't shirt short ', 'padded'],
+                 'coat' : ['dress', 'pants long ', 'skirt', 't shirt long ', 'shirt'],
+                 'pants shorts ' : ['jacket', 't shirt long ', 'headwear', 't shirt short '],
+                 't shirt short ' : ['jacket', 'pants long ', 'skirt', 'headwear', 'pants shorts '],
+                 'shirt' : ['jacket', 'pants long ', 'skirt', 'coat', 'padded'],
+                 'padded' : ['dress', 'pants long ', 't shirt long ', 'skirt', 'headwear', 'shirt']
                  }
 
 class matching_area2:
