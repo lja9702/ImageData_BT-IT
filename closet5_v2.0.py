@@ -158,26 +158,28 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 431, 431))
+        #마지막 숫자 431 -> 612로 바꿀 것!
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 431, 612))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
+        
+        #지울 부분
+        #self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        #self.pushButton.setObjectName("pushButton")
+        #self.verticalLayout.addWidget(self.pushButton)
+        #self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        #self.label.setObjectName("label")
+        #self.verticalLayout.addWidget(self.label)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(430, 0, 431, 431))
+
+        #마지막 숫자 431 -> 612 로 바꿀 것!
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(430, 0, 431, 612))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        #self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
-        #self.pushButton_2.setObjectName("pushButton_2")
-        #self.verticalLayout_2.addWidget(self.pushButton_2)
 
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(860, 0, 431, 431))
@@ -188,7 +190,9 @@ class Ui_MainWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout_3.addWidget(self.pushButton_3)
-        self.label_3 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        
+        #지울 부분
+        #self.label_3 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         #self.label_3.setObjectName("label_3")
         #self.label_3.setAcceptDrops(True)
         #self.verticalLayout_3.addWidget(self.label_3)
@@ -196,30 +200,38 @@ class Ui_MainWindow(object):
         self.cl = closetLabel("closetLabel")
         self.cl.acceptDrops()
         self.verticalLayout_3.addWidget(self.cl)
-        self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(430, 430, 431, 181))
-        self.verticalLayoutWidget_4.setObjectName("verticalLayoutWidget_4")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.pushButton_4 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.verticalLayout_4.addWidget(self.pushButton_4)
-        self.pushButton_5 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.verticalLayout_4.addWidget(self.pushButton_5)
+        
+        #지울 부분
+        #self.verticalLayoutWidget_4 = QtWidgets.QWidget(self.centralwidget)
+        #self.verticalLayoutWidget_4.setGeometry(QtCore.QRect(430, 430, 431, 181))
+        #self.verticalLayoutWidget_4.setObjectName("verticalLayoutWidget_4")
+        #self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_4)
+        #self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        #self.verticalLayout_4.setObjectName("verticalLayout_4")
+        #self.pushButton_4 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        #self.pushButton_4.setObjectName("pushButton_4")
+        #self.verticalLayout_4.addWidget(self.pushButton_4)
+        #self.pushButton_5 = QtWidgets.QPushButton(self.verticalLayoutWidget_4)
+        #self.pushButton_5.setObjectName("pushButton_5")
+        #self.verticalLayout_4.addWidget(self.pushButton_5)
+        
+        
         self.verticalLayoutWidget_5 = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget_5.setGeometry(QtCore.QRect(860, 430, 431, 181))
         self.verticalLayoutWidget_5.setObjectName("verticalLayoutWidget_5")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
+        
+        #지울 부분
         #self.pushButton_6 = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
         #self.pushButton_6.setObjectName("pushButton_6")
         #self.verticalLayout_5.addWidget(self.pushButton_6)
         #self.pushButton_7 = QtWidgets.QPushButton(self.verticalLayoutWidget_5)
         #self.pushButton_7.setObjectName("pushButton_7")
         #self.verticalLayout_5.addWidget(self.pushButton_7)
+        
+        
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 610, 431, 181))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -246,21 +258,32 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        #옷 불러오기 버튼 클릭시 이벤트 동작
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.pushButton_3.clicked.connect(self.openFile)
-
+        
+        #옷 정보를 볼 수 있는 레이아웃
         self.info_layout = QGridLayout()
         self.info_button = QPushButton("옷 정보보기")
         self.info_button.clicked.connect(self.infoButtonClicked)
         self.info_layout.addWidget(self.info_button)
         self.verticalLayout_5.addLayout(self.info_layout)
 
+        #옷 매칭을 할 수 있는 레이아웃
         self.matchingLayout = QGridLayout()
-        self.matching_button = QPushButton("매칭")
+        #'매칭' -> '옷 매칭하기'로 텍스트 바꿈
+        self.matching_button = QPushButton("옷 매칭하기")
         self.matching_button.clicked.connect(self.matchingButtonClicked)
         self.matchingLayout.addWidget(self.matching_button)
         self.verticalLayout_2.addLayout(self.matchingLayout)
+
+        #옷 추천을 할 수 있는 레이아웃
+        self.recommendLayout = QGridLayout()
+        self.recommend_button = QPushButton("옷 추천하기")
+        self.recommend_button.clicked.connect(self.recommendButtonClicked)
+        self.recommendLayout.addWidget(self.recommend_button)
+        self.verticalLayout.addLayout(self.recommendLayout)
 
     #영역3의 '옷 정보보기' 버튼에 대한 이벤트 리스너
     def infoButtonClicked(self):
@@ -329,12 +352,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "옷장 관리"))
-        self.pushButton.setText(_translate("MainWindow", "PushButton"))
-        self.label.setText(_translate("MainWindow", "<옷 추천>"))
+        #self.pushButton.setText(_translate("MainWindow", "PushButton"))
+        #self.label.setText(_translate("MainWindow", "<옷 추천>"))
         #self.pushButton_2.setText(_translate("MainWindow", "매칭"))
         self.pushButton_3.setText(_translate("MainWindow", "옷 불러오기"))
-        self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
-        self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
+        #self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
+        #self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
         #self.pushButton_6.setText(_translate("MainWindow", "PushButton"))
         #self.pushButton_7.setText(_translate("MainWindow", "PushButton"))
 
@@ -354,7 +377,7 @@ class Ui_MainWindow(object):
         self.info_layout.addWidget(self.info_button)
         
     
-    #영역2의 '매칭' 버튼에 대한 이벤트 리스너
+    #영역2의 '옷 매칭하기' 버튼에 대한 이벤트 리스너
     def matchingButtonClicked(self):
 
         for i in reversed(range(self.matchingLayout.count())):
@@ -365,11 +388,9 @@ class Ui_MainWindow(object):
         self.matching_img_3 = QLabel()
         self.matching_img_4 = QLabel()
         
-        
         #옷장 경로
         path_dir = "C:\\Users/jykatharGram/Documents/GitHub/ImageData_BT-IT/dataSets/"
         dir_list = os.listdir(path_dir)
-
 
         #랜덤한 스타일로 랜덤한 옷 이미지 출력
         random_style_1 = random.choice(dir_list)
@@ -409,6 +430,121 @@ class Ui_MainWindow(object):
         self.matchingLayout.addWidget(self.matching_img_4, 1, 1)
         self.matchingLayout.addWidget(self.back_button_2, 5, 1)
 
+    # 영역1의 '옷 추천하기' 버튼에 대한 이벤트 리스너
+    def recommendButtonClicked(self):
+
+        for i in reversed(range(self.recommendLayout.count())):
+            self.recommendLayout.itemAt(i).widget().deleteLater()
+
+        #카테고리 라벨
+        self.cat_label_1 = QLabel("옷장속의 옷")
+        self.cat_label_2 = QLabel("추천하는 옷 1")
+        self.cat_label_3 = QLabel("추천하는 옷 2")
+
+        #1열에 출력하는 옷장 속의 옷들
+        self.closet_img_1 = QLabel()
+        self.closet_img_2 = QLabel()
+        self.closet_img_3 = QLabel()
+
+        #2,3열에 출력하는 추천받은 옷들
+        self.recommend_img_1 = QLabel()
+        self.recommend_img_2 = QLabel()
+        self.recommend_img_3 = QLabel()
+        self.recommend_img_4 = QLabel()
+        self.recommend_img_5 = QLabel()
+        self.recommend_img_6 = QLabel()
+
+        # 옷장 경로
+        path_dir = "C:\\Users/jykatharGram/Documents/GitHub/ImageData_BT-IT/dataSets/"
+        dir_list = os.listdir(path_dir)
+
+        # 랜덤한 스타일로 랜덤한 옷 1열에 이미지 출력
+        random_style_1 = random.choice(dir_list)
+        clothes_in_random_style_1 = os.listdir(path_dir + random_style_1)
+        random_cloth_1 = random.choice(clothes_in_random_style_1)
+        bannerPixelMap_1 = QPixmap(path_dir + random_style_1 + '/' + random_cloth_1)
+        smallerBannerPixmap_1 = bannerPixelMap_1.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.closet_img_1.setPixmap(smallerBannerPixmap_1)
+
+        random_style_2 = random.choice(dir_list)
+        clothes_in_random_style_2 = os.listdir(path_dir + random_style_2)
+        random_cloth_2 = random.choice(clothes_in_random_style_2)
+        bannerPixelMap_2 = QPixmap(path_dir + random_style_2 + '/' + random_cloth_2)
+        smallerBannerPixmap_2 = bannerPixelMap_2.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.closet_img_2.setPixmap(smallerBannerPixmap_2)
+
+        random_style_3 = random.choice(dir_list)
+        clothes_in_random_style_3 = os.listdir(path_dir + random_style_3)
+        random_cloth_3 = random.choice(clothes_in_random_style_3)
+        bannerPixelMap_3 = QPixmap(path_dir + random_style_3 + '/' + random_cloth_3)
+        smallerBannerPixmap_3 = bannerPixelMap_3.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.closet_img_3.setPixmap(smallerBannerPixmap_3)
+
+        # 랜덤한 스타일로 랜덤한 옷 2, 3열에 이미지 출력
+        random_style_4 = random.choice(dir_list)
+        clothes_in_random_style_4 = os.listdir(path_dir + random_style_4)
+        random_cloth_4 = random.choice(clothes_in_random_style_4)
+        bannerPixelMap_4 = QPixmap(path_dir + random_style_4 + '/' + random_cloth_4)
+        smallerBannerPixmap_4 = bannerPixelMap_4.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_1.setPixmap(smallerBannerPixmap_1)
+
+        random_style_5 = random.choice(dir_list)
+        clothes_in_random_style_5 = os.listdir(path_dir + random_style_5)
+        random_cloth_5 = random.choice(clothes_in_random_style_5)
+        bannerPixelMap_5 = QPixmap(path_dir + random_style_5 + '/' + random_cloth_5)
+        smallerBannerPixmap_5 = bannerPixelMap_5.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_2.setPixmap(smallerBannerPixmap_5)
+
+        random_style_6 = random.choice(dir_list)
+        clothes_in_random_style_6 = os.listdir(path_dir + random_style_6)
+        random_cloth_6 = random.choice(clothes_in_random_style_6)
+        bannerPixelMap_6 = QPixmap(path_dir + random_style_6 + '/' + random_cloth_6)
+        smallerBannerPixmap_6 = bannerPixelMap_6.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_3.setPixmap(smallerBannerPixmap_6)
+
+        random_style_7 = random.choice(dir_list)
+        clothes_in_random_style_7 = os.listdir(path_dir + random_style_7)
+        random_cloth_7 = random.choice(clothes_in_random_style_7)
+        bannerPixelMap_7 = QPixmap(path_dir + random_style_7 + '/' + random_cloth_7)
+        smallerBannerPixmap_7 = bannerPixelMap_7.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_4.setPixmap(smallerBannerPixmap_7)
+
+        random_style_8 = random.choice(dir_list)
+        clothes_in_random_style_8 = os.listdir(path_dir + random_style_8)
+        random_cloth_8 = random.choice(clothes_in_random_style_8)
+        bannerPixelMap_8 = QPixmap(path_dir + random_style_8 + '/' + random_cloth_8)
+        smallerBannerPixmap_8 = bannerPixelMap_8.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_5.setPixmap(smallerBannerPixmap_8)
+
+        random_style_9 = random.choice(dir_list)
+        clothes_in_random_style_9 = os.listdir(path_dir + random_style_9)
+        random_cloth_9 = random.choice(clothes_in_random_style_9)
+        bannerPixelMap_9 = QPixmap(path_dir + random_style_9 + '/' + random_cloth_9)
+        smallerBannerPixmap_9 = bannerPixelMap_9.scaled(143, 200, Qt.KeepAspectRatio, Qt.FastTransformation)
+        self.recommend_img_6.setPixmap(smallerBannerPixmap_9)
+
+        self.back_button_3 = QPushButton("뒤로 가기")
+        self.back_button_3.clicked.connect(self.backButtonClicked_3)
+
+        #카테고리 라벨
+        self.recommendLayout.addWidget(self.cat_label_1, 0, 0)
+        self.recommendLayout.addWidget(self.cat_label_2, 0, 1)
+        self.recommendLayout.addWidget(self.cat_label_3, 0, 2)
+
+        #옷장속의 옷 라벨
+        self.recommendLayout.addWidget(self.closet_img_1, 1, 0)
+        self.recommendLayout.addWidget(self.closet_img_2, 2, 0)
+        self.recommendLayout.addWidget(self.closet_img_3, 3, 0)
+
+        #추천하는 옷 라벨
+        self.recommendLayout.addWidget(self.recommend_img_1, 1, 1)
+        self.recommendLayout.addWidget(self.recommend_img_2, 1, 2)
+        self.recommendLayout.addWidget(self.recommend_img_3, 2, 1)
+        self.recommendLayout.addWidget(self.recommend_img_4, 2, 2)
+        self.recommendLayout.addWidget(self.recommend_img_5, 3, 1)
+        self.recommendLayout.addWidget(self.recommend_img_6, 3, 2)
+        self.recommendLayout.addWidget(self.back_button_3, 5, 2)
+
 
 
 
@@ -433,9 +569,18 @@ class Ui_MainWindow(object):
     def backButtonClicked_2(self):
         for i in reversed(range(self.matchingLayout.count())):
             self.matchingLayout.itemAt(i).widget().deleteLater()
-        self.matching_button = QPushButton("매칭")
+        #'매칭' -> '옷 매칭하기' 로 텍스트 바꿈
+        self.matching_button = QPushButton("옷 매칭하기")
         self.matching_button.clicked.connect(self.matchingButtonClicked)
         self.matchingLayout.addWidget(self.matching_button)
+
+    #영역1의 '뒤로가기' 버튼에 대한 이벤트 리스너
+    def backButtonClicked_3(self):
+        for i in reversed(range(self.recommendLayout.count())):
+            self.recommendLayout.itemAt(i).widget().deleteLater()
+        self.recommend_button = QPushButton("옷 추천하기")
+        self.recommend_button.clicked.connect(self.recommendButtonClicked)
+        self.recommendLayout.addWidget(self.recommend_button)
 
     def color_picker(self):
         color = QtWidgets.QColorDialog.getColor()
