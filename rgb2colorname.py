@@ -771,7 +771,7 @@ HexNameDict = { \
 ,"#7FFFD4":"skyblue" \
 ,"#7FFFD4":"skyblue" \
 ,"#800000":"brown" \
-,"#800000":"brawn" \
+,"#800000":"brown" \
 ,"#800080":"purple" \
 ,"#800080":"purple" \
 ,"#808000":"green" \
@@ -837,7 +837,7 @@ HexNameDict = { \
 ,"#8B8970":"yellow" \
 ,"#8B8989":"white" \
 ,"#8B8B00":"yellow" \
-,"#8B8B7A":"yello" \
+,"#8B8B7A":"yellow" \
 ,"#8B8B83":"white" \
 ,"#8C8C8C":"gray" \
 ,"#8DB6CD":"skyblue" \
@@ -891,7 +891,7 @@ HexNameDict = { \
 ,"#AFEEEE":"skyblue" \
 ,"#B03060":"brown" \
 ,"#B03060":"brown" \
-,"#B0B0B0":"gray69" \
+,"#B0B0B0":"gray" \
 ,"#B0C4DE":"gray" \
 ,"#B0E0E6":"skyblue" \
 ,"#B0E2FF":"skyblue" \
@@ -910,7 +910,7 @@ HexNameDict = { \
 ,"#BA55D3":"purple" \
 ,"#BABABA":"gray" \
 ,"#BBFFFF":"skyblue" \
-,"#BC8F8F":"brwon" \
+,"#BC8F8F":"brown" \
 ,"#BCD2EE":"gray" \
 ,"#BCEE68":"green" \
 ,"#BDB76B":"green" \
