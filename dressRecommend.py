@@ -35,6 +35,7 @@ class recommend_area1:
         typeList = dressMatching.type_matching[self.type]
 
         recomList = []
+        brandList = []
         for cnt in range(0,2):
         #어울리는 타입 랜덤으로 선택
             type = random.choice(typeList)
@@ -51,7 +52,8 @@ class recommend_area1:
                 for index, row in df.iterrows():
                     if(row['type'] == type) and (row['simplecolor'] in colorList): #만약 어울리는 옷이 있으면 True반환
                         recomList.append(self.dataSet_path + dirName + row['name'])
+                        brandList.append(row['brand'])
                         flag = True
                         break
 
-        return recomList
+        return [recomList, brandList]

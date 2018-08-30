@@ -4,7 +4,6 @@ import rgb2colorname
 import re
 import csv
 import os
-import retrain_run_inference
 
 
 def make_DressInfoFile(file_path, type, brand, price, color, nearestcolor):

@@ -24,12 +24,8 @@ def centroid_histogram(clt):
 
 def get_Color(get_all_path):
     #가져올 파일의 디렉토리와 파일 명 풀네임 받기
-    dir_path = (get_all_path.path_split())[0]
+#    dir_path = (get_all_path.path_split())[0]
     file_path = get_all_path.FILE_PATH
-
-    #path에 존재하는 파일 목록 가져오기
-    file_list = [f for f in listdir(dir_path) if isfile(join(dir_path, f))]
-    file_list = [x for x in file_list if x.find("jpg") != -1]
 
     image = cv2.imread(file_path)
     print(image.shape)
