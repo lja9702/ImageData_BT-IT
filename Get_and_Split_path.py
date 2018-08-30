@@ -1,6 +1,7 @@
 import os
 import csv
 import numpy as np
+import pandas as pd
 class GetAllPath:
     # ======================================================================================================
     # 가져온 path에서 디렉토리와 파일명 분리 추출
@@ -21,6 +22,7 @@ class GetAllPath:
         self.CROLLING_PATH = "/home/lja97/Crolling/"
         #루트 경로
         self.ROOT_PATH = "/home/lja97/"
+        self.DATASET_PATH = "/home/lja97/dataSets/"
     def set_Filepath(self, filepath):
         self.FILE_PATH = filepath
         return self.FILE_PATH  ##옷 자체의 경로 <- 옷 새로 저장할 때 디렉토리 정보 받이오기
@@ -42,21 +44,19 @@ class read_csvFile:
         # csv파일불러서 지역변수에 저장하기
         self.filename = FILE_NAME
         self.closetpath = CLOSET_PATH
-        self.csv_file = csv.reader(open(self.closetpath + 'closetInfo.csv', 'rb'))
-        # 첫번째 줄은 건너뛰고
-        self.header = self.csv_file.next()
-
-    def make_Datalist(self):
-        # csv를 한줄씩 읽어서
-        self.data = [] #빈 사전형 리스트 생성
-        for row in self.csv_file:   #한줄씩 읽기
-            self.data.append(row)
-        self.data = np.arrary(self.data)    #array로 바꿔주기
+        self.csv_file = pd.read_csv(self.closetpath + 'closetInfo.csv',
+                                    names = ["name","type","brand","price","hexcolor","simplecolor"])
 
     def get_specificRow_useFilePath(self):
         # 파일 명이 해당 파일 명인 얘를 받아오기
-        specData = self.data[0::, 0] == self.filename
 
+        specRow = self.csv_file[self.csv_file.name == self.filename]
+        specRow = specRow.iloc[0]
+        self.type = specRow['type']
+        self.brand = specRow['brand']
+        self.price = specRow['price']
+        self.hexcolor = specRow['hexcolor']
 
-#read_csvFile = read_csvFile(FILE_NAME = "4.jpg",CLOSET_PATH = '/home/lja97/MyCloset/')
-
+        #print(self.type, self.brand, self.price, self.hexcolor)
+#read_csvFile = read_csvFile(FILE_NAME = "4.jpg", CLOSET_PATH = '/home/lja97/MyCloset/')
+#read_csvFile.get_specificRow_useFilePath()
